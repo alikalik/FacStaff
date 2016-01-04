@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 
+    User Login
+
+  form(method="post", action="/login")
+    input(name="user", type="text", placeholder="input tz")
+    input(type="submit")

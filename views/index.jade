@@ -1,0 +1,64 @@
+extends layout
+
+block content
+  h1
+    |Edit Profile
+  if(status === "success")
+    .status-success.label.label-success
+        |Profile Saved
+  if(status === "failure")
+      .status-failure
+        |FAIlURE
+  div.container(style="direction:rtl")
+    form.form-inline(method="post", role="form" action="/")
+      each person in list
+          fieldset
+              legend
+                  b|#{person.academic_unit_primery} / #{person.academic_unit_secondary}
+              p
+                b
+                  |#{person.degree_en}
+                  |#{person.first_name_en}
+                  |#{person.last_name_en}
+                  br
+                  |#{person.degree_he}
+                  |#{person.first_name_he}
+                  |#{person.last_name_he}
+              input.form-control(type="hidden", name="id", value=person.id)
+              input.form-control(type="hidden", name="academic_unit_primery", value=person.academic_unit_primery)
+              input.form-control(type="hidden", name="academic_unit_secondary", value=person.academic_unit_secondary)
+              p
+                label(for="email") דוא״ל: 
+                input.form-control.form-control(type="email", name="email_local", value=person.email_local, style="direction:ltr")
+              p
+                |SAP דוא״ל: 
+                a(href="mailto:#{person.email_sap}") #{person.email_sap}
+              p
+                label(for="reception_hours") שעות קבלה:  
+                input.form-control(type="text", name="reception_hours", value=person.reception_hours)
+              p
+                label(for="phone") טלפון:  
+                input.form-control(type="text", name="phone_local", value=person.phone_local)
+              p
+                label(for="website") אתר אישי:  
+                input.form-control(type="text", name="web_page", value=person.web_page, size="35", style="direction:ltr")
+              p
+                label(for="building") בניין:  
+                input.form-control(type="text", name="building", value=person.building)
+              p
+                label(for="room") חדר:  
+                input.form-control(type="text", name="room", value=person.room)
+              p
+                label(for="about_he") תחומי עניין (עברית):
+                br 
+                textarea.form-control(rows="4" cols="50" name="about_he") #{person.about_he}
+              p
+                label(for="about_en") תחומי עניין (אנגלית):
+                br 
+                textarea.form-control(rows="4" cols="50" name="about_en" style="direction:ltr") #{person.about_en}
+
+      input.btn.btn-success(type="submit", value="שמור")
+
+      a(href="/logout") 
+        input.btn.btn-danger(value="צא מהמערכת")
+
